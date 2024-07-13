@@ -14,6 +14,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['user_db']
 users = db['users']
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -32,6 +33,7 @@ def login():
             flash("Login Unsuccessful. Please check your email and password")
     return render_template("login.html")
 
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -48,6 +50,7 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html")
 
+
 @app.route("/user_dashboard")
 def user_dashboard():
     if "email" in session:
@@ -56,6 +59,7 @@ def user_dashboard():
         return render_template("user_dashboard.html", user=user)
     else:
         return redirect(url_for("login"))
+
 
 @app.route("/admin")
 def admin():
@@ -66,12 +70,14 @@ def admin():
         flash("You are not authorized to view this page")
         return redirect(url_for("login"))
 
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     session.pop("email", None)
     flash("You have been logged out!")
     return redirect(url_for("home"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
