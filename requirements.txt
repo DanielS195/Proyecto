@@ -3,3 +3,4 @@ flask_bootstrap
 pymongo
 pymysql
 werkzeug
+pyserial
